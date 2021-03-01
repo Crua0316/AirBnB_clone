@@ -6,6 +6,7 @@ import cmd
 import models
 import shlex
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 from models import storage
 from models.user import User
 from models.city import City
@@ -111,13 +112,13 @@ class HBNBCommand(cmd.Cmd):
         """
         if not arg:
             all_list = []
-            for key, value in storage.all().items():
+            for value in storage.all().items():
                 all_list.append(str(value))
             print(all_list)
             return
         if arg in HBNBCommand.__bnb_classes:
             all_list = []
-            for key, value in storage.all().items():
+            for value in storage.all().items():
                 if type(value).__name__ == arg:
                     all_list.append(str(value))
             print(all_list)
